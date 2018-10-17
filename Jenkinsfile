@@ -23,6 +23,7 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh 'curl -O ${BUILD_URL}artifact/helloworld'
+                sh 'chmod +x helloworld'
                 sh './helloworld'
             }
         }
