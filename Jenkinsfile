@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                curl -O ${BUILD_URL}artifact/helloworld
+                sh 'curl -O ${BUILD_URL}artifact/helloworld'
                 sh './helloworld'
             }
         }
