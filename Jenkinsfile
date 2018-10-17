@@ -22,9 +22,11 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
-                sh 'curl -O ${BUILD_URL}artifact/helloworld'
-                sh 'chmod +x helloworld'
-                sh './helloworld'
+                sh '''#!/bin/bash
+                curl -O ${BUILD_URL}artifact/helloworld
+                chmod +x helloworld
+                ./helloworld
+                '''
             }
         }
         stage('Deploy') {
