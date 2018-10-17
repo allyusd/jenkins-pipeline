@@ -1,10 +1,10 @@
 pipeline {
-    agent {
-        label 'cpp'
-    }
 
     stages {
         stage('Build') {
+            agent {
+                label 'cpp'
+            }
             steps {
                 echo 'Building..'
                 git 'https://github.com/allyusd/helloworld.cpp.git'
@@ -12,6 +12,9 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                label 'test'
+            }
             steps {
                 echo 'Testing..'
                 sh './helloworld'
