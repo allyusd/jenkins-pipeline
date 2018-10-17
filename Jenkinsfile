@@ -10,6 +10,11 @@ pipeline {
                 git 'https://github.com/allyusd/helloworld.cpp.git'
                 sh 'g++ helloworld.cpp -o helloworld'
             }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'helloworld'
+                }
+            }
         }
         stage('Test') {
             agent {
@@ -17,6 +22,7 @@ pipeline {
             }
             steps {
                 echo 'Testing..'
+                curl -O ${BUILD_URL}artifact/helloworld
                 sh './helloworld'
             }
         }
