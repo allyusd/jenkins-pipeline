@@ -13,7 +13,8 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'helloworld', 'unittest'
+                    archiveArtifacts artifacts: 'helloworld,unittest'
+
                 }
             }
         }
