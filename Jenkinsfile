@@ -24,9 +24,9 @@ pipeline {
             steps {
                 echo 'Testing..'
                 sh '''#!/bin/bash
-                curl -O ${BUILD_URL}artifact/helloworld
-                chmod +x helloworld
-                ./helloworld
+                curl -O ${BUILD_URL}artifact/unittest
+                chmod +x unittest
+                ./unittest
                 '''
             }
         }
