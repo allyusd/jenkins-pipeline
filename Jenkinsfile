@@ -14,7 +14,6 @@ pipeline {
             post {
                 success {
                     archiveArtifacts artifacts: 'helloworld,unittest'
-
                 }
             }
         }
@@ -27,8 +26,13 @@ pipeline {
                 sh '''#!/bin/bash
                 curl -O ${BUILD_URL}artifact/unittest
                 chmod +x unittest
-                ./unittest
+                ./unittest --gtest_output="xml:report.xml"
                 '''
+            }
+            post {
+                always {
+                    junit '*.xml'
+                }
             }
         }
         stage('Deploy') {
