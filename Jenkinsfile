@@ -12,6 +12,9 @@ pipeline {
                 sh 'g++ unittest.cpp -o unittest -Igtest/include -Lgtest/lib -lgtest -lpthread'
             }
             post {
+                always {
+                    lastChanges format:'SIDE', matching: 'LINE'
+                }
                 success {
                     archiveArtifacts artifacts: 'helloworld,unittest'
                 }
