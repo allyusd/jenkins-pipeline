@@ -44,4 +44,14 @@ pipeline {
             }
         }
     }
+    post {
+        failure {
+            slackSend color: '#FF0000',
+            message: "@channel ${env.JOB_BASE_NAME} failure. (${env.BUILD_URL})"
+        }
+        fixed {
+            slackSend color: '#00FF00',
+            message: "@channel ${env.JOB_BASE_NAME} back to success."
+        }
+    }
 }
