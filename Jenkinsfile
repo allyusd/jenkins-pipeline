@@ -16,7 +16,7 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    image 'maven:3-alpine'
+                    image 'ubuntu:18.04'
                 }
             }
             steps {
@@ -27,7 +27,7 @@ pipeline {
             agent {
                 docker {
                     label 'docker'
-                    image 'maven:3-alpine'
+                    image 'base/archlinux'
                 }
             }
             steps {
