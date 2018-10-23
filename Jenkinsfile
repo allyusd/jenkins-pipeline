@@ -2,27 +2,21 @@ pipeline {
     agent none
     stages {
         stage('Build') {
-            agent {
-                label 'cpp'
-            }
+            agent { docker 'maven:3-alpine' }
             steps {
-                echo 'Building..'
-                git 'https://github.com/allyusd/helloworld.cpp.git'
-                sh 'g++ helloworld.cpp -o helloworld'
+                sh 'cat /etc/*-release'
             }
         }
         stage('Test') {
-            agent {
-                label 'test'
-            }
+            agent { docker 'ubuntu:18.04' }
             steps {
-                echo 'Testing..'
-                sh './helloworld'
+                sh 'cat /etc/*-release'
             }
         }
         stage('Deploy') {
+            agent { docker 'base/archlinux' }
             steps {
-                echo 'Deploying....'
+                sh 'cat /etc/*-release'
             }
         }
     }
