@@ -7,7 +7,7 @@ pipeline {
                     agent {
                         docker {
                             label 'docker'
-                            image 'maven:3-alpine'
+                            image 'non-exist:fail'
                         }
                     }
                     steps {
