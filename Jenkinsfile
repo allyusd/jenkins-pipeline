@@ -8,8 +8,8 @@ pipeline {
             steps {
                 script {
                     def tests = [:]
-                    def abcs = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
-                    for (f in abcs) {
+                    def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
+                    for (f in imagelist) {
                         def f_inside = "${f}"
                         tests["${f}"] = {
                             node('docker') {
