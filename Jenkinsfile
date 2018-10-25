@@ -14,7 +14,7 @@ pipeline {
                         tests["${f}"] = {
                             node('docker') {
                                 stage("${f_inside}") {
-                                    docker.image('maven:3-alpine').inside {
+                                    docker.image("${f_inside}").inside {
                                         sh "echo ${f_inside}"
                                         sh 'cat /etc/*-release'
                                     }
