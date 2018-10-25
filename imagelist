@@ -1,1 +1,1 @@
-'maven:3-alpine', 'ubuntu:18.04', 'base/archlinux'
+maven:3-alpine,ubuntu:18.04,base/archlinux
