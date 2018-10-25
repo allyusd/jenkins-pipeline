@@ -14,7 +14,7 @@ pipeline {
                     for (f in findFiles(glob: 'image_*')) {
                         def f_inside = "${f}"
                         tests["${f}"] = {
-                            node('build') {
+                            node('docker') {
                                 stage("${f_inside}") {
                                     sh "echo ${f_inside}"
                                     sh 'cat /etc/*-release'
