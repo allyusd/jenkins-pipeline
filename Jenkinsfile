@@ -2,39 +2,27 @@ pipeline {
     agent none
     stages {
         stage('parallel') {
-            parallel {
-                stage('alpine') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'maven:3-alpine'
-                        }
-                    }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
+            agent {
+                docker {
+                    label 'docker'
+                    image 'maven:3-alpine'
                 }
-                stage('ubuntu') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'ubuntu:18.04'
+            }
+            steps {
+                script {
+                    def tests = [:]
+                    for (f in findFiles(glob: 'image_*')) {
+                        def f_inside = "${f}"
+                        tests["${f}"] = {
+                            node('build') {
+                                stage("${f_inside}") {
+                                    sh "echo ${f_inside}"
+                                    sh 'cat /etc/*-release'
+                                }
+                            }
                         }
                     }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
-                }
-                stage('archlinux') {
-                    agent {
-                        docker {
-                            label 'docker'
-                            image 'base/archlinux'
-                        }
-                    }
-                    steps {
-                        sh 'cat /etc/*-release'
-                    }
+                    parallel tests
                 }
             }
         }
