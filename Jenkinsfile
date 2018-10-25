@@ -18,8 +18,10 @@ pipeline {
                         tests["${f}"] = {
                             node('docker') {
                                 stage("${f_inside}") {
-                                    sh "echo ${f_inside}"
-                                    sh 'cat /etc/*-release'
+                                    docker.image('my-custom-image').inside {
+                                        sh "echo ${f_inside}"
+                                        sh 'cat /etc/*-release'
+                                    }
                                 }
                             }
                         }
