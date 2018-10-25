@@ -7,22 +7,22 @@ pipeline {
             }
             steps {
                 script {
-                    def tests = [:]
+                    def tasks = [:]
                     def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
-                    for (f in imagelist) {
-                        def f_inside = "${f}"
-                        tests["${f}"] = {
+                    for (image in imagelist) {
+                        def image_inside = "${image}"
+                        tasks["${image}"] = {
                             node('docker') {
-                                stage("${f_inside}") {
-                                    docker.image("${f_inside}").inside {
-                                        sh "echo ${f_inside}"
+                                stage("${image_inside}") {
+                                    docker.image("${image_inside}").inside {
+                                        sh "echo ${image_inside}"
                                         sh 'cat /etc/*-release'
                                     }
                                 }
                             }
                         }
                     }
-                    parallel tests
+                    parallel tasks
                 }
             }
         }
