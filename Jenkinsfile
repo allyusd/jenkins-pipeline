@@ -13,7 +13,7 @@ pipeline {
                     //for (f in findFiles(glob: 'image_*')) {
                         def f_inside = "${f}"
                         tests["${f}"] = {
-                            node('test') {
+                            node('cpp') {
                                 stage("${f_inside}") {
                                     sh "echo ${f_inside}"
                                     sh 'cat /etc/*-release'
