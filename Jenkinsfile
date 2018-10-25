@@ -3,10 +3,7 @@ pipeline {
     stages {
         stage('parallel') {
             agent {
-                docker {
-                    label 'docker'
-                    image 'ubuntu:18.04'
-                }
+                label 'test'
             }
             steps {
                 script {
@@ -16,12 +13,10 @@ pipeline {
                     //for (f in findFiles(glob: 'image_*')) {
                         def f_inside = "${f}"
                         tests["${f}"] = {
-                            node('docker') {
+                            node('test') {
                                 stage("${f_inside}") {
-                                    docker.image('ubuntu:18.04').inside {
-                                        sh "echo ${f_inside}"
-                                        sh 'cat /etc/*-release'
-                                    }
+                                    sh "echo ${f_inside}"
+                                    sh 'cat /etc/*-release'
                                 }
                             }
                         }
