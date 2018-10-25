@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     def tasks = [:]
-                    def imagelist = ['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
+                    def imagelist = readFile('imagelist') //['maven:3-alpine', 'ubuntu:18.04', 'base/archlinux']
                     for (image in imagelist) {
                         def image_inside = "${image}"
                         tasks["${image}"] = {
